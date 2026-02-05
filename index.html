@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelfieTape - Professional Measurement Tracking</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📏</text></svg>
+
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-ruler-combined"></i>
+            <h1>SelfieTape</h1>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-link active" data-page="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-link" data-page="clients">
+                <i class="fas fa-users"></i>
+                <span>Clients</span>
+            </a>
+            <a href="#" class="nav-link" data-page="measure">
+                <i class="fas fa-plus-circle"></i>
+                <span>Measure</span>
+            </a>
+            <a href="#" class="nav-link" data-page="history">
+                <i class="fas fa-history"></i>
+                <span>History</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main App Content -->
+    <main class="app-content">
+        <!-- Dashboard Page -->
+        <section id="dashboard" class="page active">
+            <div class="page-header">
+                <h2>Dashboard</h2>
+                <p class="subtitle">Professional Body Measurement Tracking</p>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon clients">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-clients">0</h3>
+                        <p>Total Clients</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon measurements">
+                        <i class="fas fa-ruler-vertical"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-measurements">0</h3>
+                        <p>Measurements</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon week">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="week-measurements">0</h3>
+                        <p>This Week</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon accuracy">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>98%</h3>
+                        <p>Accuracy</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="actions-section">
+                <h3>Quick Actions</h3>
+                <div class="actions-grid">
+                    <button class="action-btn" data-action="new-client">
+                        <i class="fas fa-user-plus"></i>
+                        <span>New Client</span>
+                    </button>
+                    <button class="action-btn" data-action="quick-measure">
+                        <i class="fas fa-tape"></i>
+                        <span>Quick Measure</span>
+                    </button>
+                    <button class="action-btn" data-action="view-clients">
+                        <i class="fas fa-list"></i>
+                        <span>All Clients</span>
+                    </button>
+                    <button class="action-btn" data-action="view-history">
+                        <i class="fas fa-history"></i>
+                        <span>View History</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="recent-section">
+                <div class="section-header">
+                    <h3>Recent Measurements</h3>
+                    <a href="#" class="view-all" data-page="history">View All</a>
+                </div>
+                <div id="recent-list" class="recent-list">
+                    <!-- Filled by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Clients Page -->
+        <section id="clients" class="page">
+            <div class="page-header">
+                <div class="header-row">
+                    <h2>Clients</h2>
+                    <button class="btn-primary" id="add-client-btn">
+                        <i class="fas fa-plus"></i> Add Client
+                    </button>
+                </div>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="client-search" placeholder="Search clients...">
+                </div>
+            </div>
+            
+            <div id="clients-list" class="clients-list">
+                <!-- Filled by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Add Client Modal -->
+        <div id="client-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add New Client</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <form id="client-form">
+                    <div class="form-group">
+                        <label for="client-name">Full Name *</label>
+                        <input type="text" id="client-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="client-phone">Phone Number</label>
+                        <input type="tel" id="client-phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="client-email">Email Address</label>
+                        <input type="email" id="client-email">
+                    </div>
+                    <div class="form-group">
+                        <label for="client-notes">Notes</label>
+                        <textarea id="client-notes" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary close-modal">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Client</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Measurement Page -->
+        <section id="measure" class="page">
+            <div class="page-header">
+                <h2>New Measurement</h2>
+                <p>Enter accurate measurements for perfect fitting</p>
+            </div>
+            
+            <form id="measurement-form">
+                <!-- Client Selector -->
+                <div class="form-section">
+                    <h3><i class="fas fa-user"></i> Select Client</h3>
+                    <div class="form-group">
+                        <select id="measurement-client" required>
+                            <option value="">Choose a client...</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Top/Bust Measurements -->
+                <div class="form-section">
+                    <h3><i class="fas fa-tshirt"></i> Top / Bust</h3>
+                    <div class="measurement-grid">
+                        <div class="form-group">
+                            <label for="chest">Chest (inches)</label>
+                            <input type="number" id="chest" step="0.1" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="waist">Waist (inches)</label>
+                            <input type="number" id="waist" step="0.1" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hips">Hips (inches)</label>
+                            <input type="number" id="hips" step="0.1" min="0" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sleeves -->
+                <div class="form-section">
+                    <h3><i class="fas fa-hand-paper"></i> Sleeves</h3>
+                    <div class="measurement-grid">
+                        <div class="form-group">
+                            <label for="shoulder">Shoulder Width</label>
+                            <input type="number" id="shoulder" step="0.1" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sleeve">Sleeve Length</label>
+                            <input type="number" id="sleeve" step="0.1" min="0" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bottom/Legs -->
+                <div class="form-section">
+                    <h3><i class="fas fa-running"></i> Bottom / Legs</h3>
+                    <div class="measurement-grid">
+                        <div class="form-group">
+                            <label for="inseam">Inseam</label>
+                            <input type="number" id="inseam" step="0.1" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="outseam">Outseam</label>
+                            <input type="number" id="outseam" step="0.1" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="thigh">Thigh</label>
+                            <input type="number" id="thigh" step="0.1" min="0" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notes -->
+                <div class="form-section">
+                    <h3><i class="fas fa-sticky-note"></i> Additional Notes</h3>
+                    <div class="form-group">
+                        <textarea id="measurement-notes" rows="3" placeholder="Any special instructions or observations..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="reset" class="btn-secondary">Clear</button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Save Measurement
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- History Page -->
+        <section id="history" class="page">
+            <div class="page-header">
+                <div class="header-row">
+                    <h2>Measurement History</h2>
+                    <div class="filter-controls">
+                        <select id="history-filter">
+                            <option value="all">All Clients</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="history-list" class="history-list">
+                <!-- Filled by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Install App Prompt -->
+    <div id="install-prompt" class="install-prompt">
+        <div class="install-content">
+            <i class="fas fa-mobile-alt"></i>
+            <div class="install-text">
+                <h4>Install SelfieTape</h4>
+                <p>Add to home screen for better experience</p>
+            </div>
+            <button id="install-btn" class="btn-primary">Install</button>
+            <button id="dismiss-install" class="btn-secondary">&times;</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
